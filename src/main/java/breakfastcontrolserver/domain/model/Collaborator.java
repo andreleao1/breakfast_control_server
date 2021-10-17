@@ -8,21 +8,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Collaborator {
 
+	@NotNull
 	@Id
-	@Column(name = "collaborator_id", nullable = false)
+	@Column(name = "collaborator_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(nullable = false)
+	@NotNull
 	private String name;
 	
-	@Column(nullable = false)
+	@NotNull
 	private String cpf;
-	
+
+	@JsonManagedReference
+	@NotNull
 	@OneToMany(mappedBy = "collaborator")
 	private List<Food> foods;
 	
